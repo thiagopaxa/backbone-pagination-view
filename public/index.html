@@ -3,17 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <style>
+    .pagination-wrapper div,
+    .pagination-wrapper a{
+      display: inline-block;
+      margin: 5px;
+    }
+    .pagination-wrapper div.current{
+      color: #B30600;
+      font-weight: bolder;
+    }
+  </style>
 </head>
 <body>
-  <div class="pagination-wrapper">
+  <div class="pagination-wrapper-1 pagination-wrapper"></div>
+  <div class="pagination-wrapper-2 pagination-wrapper"></div>
+  <div class="pagination-wrapper-3 pagination-wrapper"></div>
+  <div class="pagination-wrapper-4 pagination-wrapper"></div>
+  <div class="pagination-wrapper-5 pagination-wrapper"></div>
 
-  </div>
+  <script type="text-template" id="pagination-template">
+    <% if (before) { %>
+      <div class="before"><</div>
+    <% } %>
 
-  <script src="vender/underscore.min.js" ></script>
-  <script src="vender/backbone.min.js" ></script>
-  <script src="PaginationView.js" ></script>
+    <% _.each(pages, function(currentPage) { %>
+      <div class="page <% if (currentPage.current) { %>current<% } %>">
+        <%= currentPage.text %>
+      </div>
+    <% }) %>
+
+    <% if (after) { %>
+      <div class="after">></div>
+    <% } %>
+  </script>
+  <script src="/vendor/jquery.min.js"></script>
+  <script src="/vendor/underscore-min.js"></script>
+  <script src="/vendor/backbone-min.js"></script>
+  <script src="/js/PaginationView.js"></script>
   <script>
-    App
+    window.pagination = new PaginationView({
+      currentPage : 1,
+      totalPages  : 5,
+      renderAt    : '.pagination-wrapper-1',
+      template    : '#pagination-template'
+    });
+
+    window.pagination.render();
+
+    window.pagination2 = new PaginationView({
+      currentPage : 2,
+      totalPages  : 20,
+      renderAt    : '.pagination-wrapper-2',
+      template    : '#pagination-template'
+    });
+
+    window.pagination2.render();
+
+    window.pagination3 = new PaginationView({
+      currentPage : 30,
+      totalPages  : 30,
+      renderAt    : '.pagination-wrapper-3',
+      template    : '#pagination-template'
+    });
+
+    window.pagination3.render();
+
+    window.pagination4 = new PaginationView({
+      currentPage : 20,
+      totalPages  : 128,
+      renderAt    : '.pagination-wrapper-4',
+      template    : '#pagination-template'
+    });
+
+    window.pagination4.render();
+
+    window.pagination5 = new PaginationView({
+      currentPage : 29,
+      totalPages  : 30,
+      renderAt    : '.pagination-wrapper-5',
+      template    : '#pagination-template'
+    });
+
+    window.pagination5.render();
   </script>
 </body>
 </html>

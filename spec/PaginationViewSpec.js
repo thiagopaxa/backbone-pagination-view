@@ -1,7 +1,12 @@
-describe('A suite', function() {
+describe('PaginationView', function() {
   'use strict';
 
-  it('contains spec with an expectation', function() {
-    expect(App.blau()).toBe(true);
+  it('should have same attributes defined in instantiation', function() {
+    var pagination = new PaginationView(
+      {currentPage: 5, totalPages: 10, template: '#template-page' }
+    );
+
+    expect([pagination.currentPage, pagination.totalPages]).toEqual([5, 10]);
   });
+
 });
